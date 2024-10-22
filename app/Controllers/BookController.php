@@ -30,12 +30,24 @@ class BookController extends Controller
     // Proses simpan buku
     public function store()
     {
-        $this->bookModel->save([
-            'title'     => $this->request->getPost('title'),
-            'author'    => $this->request->getPost('author'),
-            'publisher' => $this->request->getPost('publisher'),
-            'year'      => $this->request->getPost('year'),
-        ]);
+        // Validate the uploaded file
+        $image = $this->request->getFile('image');
+
+        if ($image && $image->isValid() && !$image->hasMoved()) {
+            // Move the file to the uploads directory
+            $imageName = $image->getRandomName(); // or specify a name
+            $image->move('uploads', $imageName);
+
+            // Save book data
+            $this->bookModel->save([
+                'title'     => $this->request->getPost('title'),
+                'author'    => $this->request->getPost('author'),
+                'publisher' => $this->request->getPost('publisher'),
+                'year'      => $this->request->getPost('year'),
+                'image'     => 'uploads/' . $imageName, // Store the image path
+            ]);
+        }
+
         return redirect()->to('/books');
     }
 
@@ -49,12 +61,29 @@ class BookController extends Controller
     // Proses update buku
     public function update($id)
     {
-        $this->bookModel->update($id, [
+        // Validate the uploaded file
+        $image = $this->request->getFile('image');
+        
+        $data = [
             'title'     => $this->request->getPost('title'),
             'author'    => $this->request->getPost('author'),
             'publisher' => $this->request->getPost('publisher'),
             'year'      => $this->request->getPost('year'),
-        ]);
+        ];
+    
+        // Check if a new image is being uploaded
+        if ($image && $image->isValid() && !$image->hasMoved()) {
+            // Move the new image to the uploads directory
+            $imageName = $image->getRandomName(); // or specify a name
+            $image->move('uploads', $imageName);
+            
+            // Update the data to include the new image path
+            $data['image'] = 'uploads/' . $imageName;
+        }
+    
+        // Update the book record
+        $this->bookModel->update($id, $data);
+    
         return redirect()->to('/books');
     }
 

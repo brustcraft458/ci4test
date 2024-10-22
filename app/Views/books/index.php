@@ -11,6 +11,7 @@
                     <th>Penulis</th>
                     <th>Penerbit</th>
                     <th>Tahun</th>
+                    <th>Gambar</th> <!-- Add column for images -->
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -21,6 +22,11 @@
                     <td><?= esc($book['author']) ?></td>
                     <td><?= esc($book['publisher']) ?></td>
                     <td><?= esc($book['year']) ?></td>
+                    <td>
+                        <?php if (!empty($book['image'])): ?>
+                            <img src="<?= base_url($book['image']) ?>" alt="Book Image" class="img-thumbnail" style="max-width: 100px;">
+                        <?php endif; ?>
+                    </td>
                     <td>
                         <a href="/books/edit/<?= $book['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
                         <a href="/books/delete/<?= $book['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin ingin menghapus buku ini?');">Hapus</a>
