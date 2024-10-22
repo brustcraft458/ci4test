@@ -26,12 +26,12 @@ class Database extends Config
      */
     public array $default = [
         'DSN'          => '',
-        'hostname'     => 'localhost',
-        'username'     => 'root',
-        'password'     => '',
-        'database'     => 'tesci4',
-        'DBDriver'     => 'MySQLi',
-        'DBPrefix'     => '',
+        'hostname' => env('database.default.hostname', 'localhost'),
+        'username' => env('database.default.username', 'root'),
+        'password' => env('database.default.password', ''),
+        'database' => env('database.default.database', 'ci4_library'),
+        'DBDriver' => env('database.default.DBDriver', 'MySQLi'),
+        'DBPrefix' => env('database.default.DBPrefix', ''),
         'pConnect'     => false,
         'DBDebug'      => true,
         'charset'      => 'utf8mb4',
