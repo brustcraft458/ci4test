@@ -1,3 +1,6 @@
+# About
+Speedrun CodeIgniter 4 untuk membuat aplikasi pendataan perpus
+
 # CodeIgniter 4 Application Starter
 
 ## What is CodeIgniter?
