@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Buku</title>
-    <!-- Link to Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+<?= $this->extend('layouts/default') ?>
+
+<?= $this->section('content') ?>
     <div class="container mt-5">
         <h1 class="text-center mb-4">Tambah Buku</h1>
         <form action="/books/store" method="post">
@@ -30,8 +23,4 @@
             <button type="submit" class="btn btn-primary">Simpan</button>
         </form>
     </div>
-
-    <!-- Bootstrap JS and dependencies (optional for interactive components) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<?= $this->endSection() ?>
